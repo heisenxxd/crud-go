@@ -1,0 +1,10 @@
+package service
+
+import (
+	resterr "github.com/heisenxxd/crud-go/crud-go/src/configuration/rest_err"
+	"github.com/heisenxxd/crud-go/crud-go/src/model"
+)
+
+func (*userDomainService) FindUser(id string) (*model.UserDomain, *resterr.Resterr) {
+    return nil, nil
+}

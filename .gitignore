@@ -7,6 +7,8 @@
 *.dll
 *.so
 *.dylib
+*.env
+.history/
 
 # Test binary, built with `go test -c`
 *.test
