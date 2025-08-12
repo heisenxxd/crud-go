@@ -5,6 +5,6 @@ import (
 	"github.com/heisenxxd/crud-go/crud-go/src/model"
 )
 
-func (*userDomainService) UpdateUser(id string, useruserDomain model.UserDomain) *resterr.Resterr {
+func (*userDomainService) UpdateUser(id string, useruserDomain model.UserDomainInterface) *resterr.Resterr {
     return nil
 }

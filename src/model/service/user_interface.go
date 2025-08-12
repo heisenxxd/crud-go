@@ -9,13 +9,13 @@ func NewUserDomainService() UserDomainService {
 }
 
 type userDomainService struct {
-	model.UserDomain
+	model.UserDomainInterface
 }
 
 
 type UserDomainService interface {
-	CreateUser(model.UserDomain) *resterr.Resterr
+	CreateUser(model.UserDomainInterface) *resterr.Resterr
 	DeleteUser(string) *resterr.Resterr
-	UpdateUser(string, model.UserDomain) *resterr.Resterr
-	FindUser(string) (*model.UserDomain, *resterr.Resterr)
+	UpdateUser(string, model.UserDomainInterface) *resterr.Resterr
+	FindUser(string) (*model.UserDomainInterface, *resterr.Resterr)
 }

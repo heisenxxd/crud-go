@@ -2,22 +2,23 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/heisenxxd/crud-go/crud-go/src/configuration/logger"
 	"github.com/heisenxxd/crud-go/crud-go/src/configuration/validation"
 	"github.com/heisenxxd/crud-go/crud-go/src/model"
 	"github.com/heisenxxd/crud-go/crud-go/src/model/request"
-	"github.com/heisenxxd/crud-go/crud-go/src/model/service"
+	"github.com/heisenxxd/crud-go/crud-go/src/view"
 
 	"go.uber.org/zap"
 )
 
 var (
-	UserDomainInterface model.UserDomain
+	UserDomainInterface model.UserDomainInterface
 )
 
-func CreateUser(c *gin.Context) {
+func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	logger.Info("Init CreateUser controller",
 		zap.String("journey", "CreateUser"),)
 
@@ -38,14 +39,19 @@ func CreateUser(c *gin.Context) {
 		userRequest.Password,
 		userRequest.Age,
 	)
-    service := service.NewUserDomainService()
-	if err := service.CreateUser(domain); err != nil {
+	if err := uc.service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
 
-	logger.Info("User Created successfully",
-	zap.String("journey", "CreateUser"))
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domain))
+	i := int8(domain.GetAge())
+	ageString := strconv.Itoa(int(i))
+	logger.Info("User Created Sucessfully",
+    zap.String("journey", "CreateUser"),
+    zap.String("name", domain.GetName()),
+    zap.String("email", domain.GetEmail()),
+    zap.String("age", ageString),
+)
 }

@@ -5,6 +5,6 @@ import (
 	"github.com/heisenxxd/crud-go/crud-go/src/model"
 )
 
-func (*userDomainService) FindUser(id string) (*model.UserDomain, *resterr.Resterr) {
+func (*userDomainService) FindUser(id string) (*model.UserDomainInterface, *resterr.Resterr) {
     return nil, nil
 }

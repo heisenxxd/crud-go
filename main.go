@@ -5,7 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/heisenxxd/crud-go/crud-go/src/configuration/logger"
+	"github.com/heisenxxd/crud-go/crud-go/src/controller"
 	"github.com/heisenxxd/crud-go/crud-go/src/controller/routes"
+	"github.com/heisenxxd/crud-go/crud-go/src/model/service"
 	"github.com/joho/godotenv"
 )
 
@@ -16,8 +18,12 @@ func main() {
 		log.Println("erro ao carregar as variaveis de ambiente", err)
 	}
 
+	// init dependecies
+	service := service.NewUserDomainService()
+	userController := controller.NewUserControllerInterface(service)
+
 	router := gin.Default()
-	routes.InitRoutes(&router.RouterGroup)
+	routes.InitRoutes(&router.RouterGroup, userController)
 
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)

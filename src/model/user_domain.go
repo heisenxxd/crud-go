@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 )
 
-type UserDomain interface {
+type UserDomainInterface interface {
 	GetEmail() string
 	GetPassword() string
 	GetName() string
