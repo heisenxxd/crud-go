@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/heisenxxd/crud-go/crud-go/src/configuration/database/mongodb"
 	"github.com/heisenxxd/crud-go/crud-go/src/configuration/logger"
 	"github.com/heisenxxd/crud-go/crud-go/src/controller"
 	"github.com/heisenxxd/crud-go/crud-go/src/controller/routes"
@@ -17,6 +18,8 @@ func main() {
 	if err != nil {
 		log.Println("erro ao carregar as variaveis de ambiente", err)
 	}
+
+	mongodb.InitConnection()
 
 	// init dependecies
 	service := service.NewUserDomainService()
